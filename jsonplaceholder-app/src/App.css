@@ -12,8 +12,15 @@
     border-left: 1px solid;
 }
 
-[class ^= tableRow] {
+[class ^= tableRow] div{
+    display: flex;
+    justify-content: space-between;
+}
 
+[class ^= tableRow] div>span{
+    width: 85%;
+    text-align: left;
+    padding: 0 15px 0;
 }
 
 [class ^= tableRow] td {

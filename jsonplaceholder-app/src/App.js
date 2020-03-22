@@ -1,36 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import './App.css';
-
-//TODO хранить ли state в App и передавать в пропсы или в каждой компоненты сохранять инфу от запроса
-//TODO check isLoading and for what it
+import TableRow from "./components/TableRow/TableRow";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isModalOpen: false,
-            clickedPostId: '',
+            isLoading: true,
             posts: [],
-            users: [],
+            postInfo: {},
         };
-        this.toggleModal = this.toggleModal.bind(this);
     }
 
-    toggleModal() {
-        this.setState(state => ({isModalOpen: !state.isModalOpen}))
+    handleOpenModal = (post) => {
+        this.setState({
+            isModalOpen: true,
+            postInfo: post,
+        })
     };
 
-    rowOnClicked() {
-        document.onclick = (event) => {
-            if (event.target.getAttribute('class') === null) {
-                return
-            }
-            if (event.target.getAttribute('class').includes('tableRow-button-id')) {
-                this.setState(state => ({clickedPostId: event.target.getAttribute('class').split('-')[3]}));
-            }
-        };
-    }
+    handleCloseModal = () => {
+        this.setState({
+            isModalOpen: false,
+            postInfo: {}
+        })
+    };
 
     componentDidMount() {
         fetch(`https://jsonplaceholder.typicode.com/posts`)
@@ -43,87 +39,75 @@ class App extends React.Component {
             })
             .catch(err => {
                 console.log("Fetch for post data failed");
-                this.setState({isLoading: false});
-            });
-
-        fetch(`https://jsonplaceholder.typicode.com/users`)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({
-                    users: data,
-                    isLoading: false
-                });
-            })
-            .catch(err => {
-                console.log("Fetch for users data failed");
+                document.getElementById('root').innerHTML = 'Sorry, server is not available now';
                 this.setState({isLoading: false});
             });
     }
 
     render() {
+        const {isLoading, isModalOpen, posts, postInfo,} = this.state;
         return (
-            <div className='main'>
-                <table className='table'>
-                    <caption>Post information</caption>
+            <>
+                {isLoading ?
+                    <div>Loading...</div> :
 
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>userId</th>
-                        <th>title</th>
-                    </tr>
-                    </thead>
+                    <div className='main'>
+                        <table className='table'>
+                            <caption>Post information</caption>
 
-                    <tbody>
-                    <TableRow
-                        posts={this.state.posts}
-                        toggleModal={this.toggleModal}
-                        rowOnClicked={this.rowOnClicked()}/>
-                    </tbody>
-                </table>
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>userId</th>
+                                <th>title</th>
+                            </tr>
+                            </thead>
 
-                <div className="modal">
-                    {this.state.isModalOpen &&
-                    <Modal>
-                        <PostInfo
-                            toggleModal={this.toggleModal}
-                            postInfo={this.state.posts[this.state.clickedPostId - 1]}
-                            userInfo={this.state.users[this.state.posts[this.state.clickedPostId - 1].userId - 1]}/>
-                    </Modal>
-                    }
-                </div>
-            </div>
+                            <tbody>
+                            {posts.map((post) => (
+                                <TableRow
+                                    key={post.id}
+                                    post={post}
+                                    onOpenModal={this.handleOpenModal}
+                                />))
+                            }
+                            </tbody>
+                        </table>
+
+                        <div className="modal">
+                            {isModalOpen &&
+                            <Modal>
+                                <PostInfo
+                                    onCloseModal={this.handleCloseModal}
+                                    postInfo={postInfo}
+                                />
+                            </Modal>
+                            }
+                        </div>
+                    </div>}
+            </>
         )
     }
 }
 
 class TableRow extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            //TODO to know for what isLoading
-            isLoading: true,
-        };
-    }
-
     render() {
+        const {post, onOpenModal} = this.props;
         return (
-            this.props.posts.map((post) =>
-                <tr key={post.id}
-                    className={"tableRow-id-" + post.id}
-                >
-                    <td>{post.id}</td>
-                    <td>{post.userId}</td>
-                    <td>
-                        {post.title}
+            <tr className={"tableRow-id-" + post.id}>
+                <td>{post.id}</td>
+                <td>{post.userId}</td>
+                <td>
+                    <div>
+                        <span>{post.title}</span>
                         <button
                             className={"tableRow-button-id-" + post.id}
-                            onClick={this.props.toggleModal}>
+                            onClick={() => onOpenModal(post)}>
                             Open full info
                         </button>
-                    </td>
-                </tr>
-            )
+                    </div>
+                </td>
+            </tr>
         )
     }
 }
@@ -155,18 +139,45 @@ class Modal extends React.Component {
 class PostInfo extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            isLoading: true,
+            userInfo: {},
+        }
+    }
+
+    componentDidMount() {
+        fetch(`https://jsonplaceholder.typicode.com/users/${this.props.postInfo.userId}`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    isLoading: false,
+                    userInfo: data,
+                })
+            })
+            .catch(err => {
+                console.log('Fetch for users data failed');
+                document.querySelector('.postInfo').innerHTML = 'Sorry, server is not available now';
+                this.setState({ isLoading: false })
+            })
     }
 
     render() {
+        const {isLoading, userInfo} = this.state;
+        const {postInfo, onCloseModal} = this.props;
         return (
             <div className="postInfo">
-                <div className='postInfo-content'>
-                    <div>Post information</div>
-                    <div>Post body: {this.props.postInfo.body}</div>
-                    <div>User name: {this.props.userInfo.name}</div>
-                </div>
-                <button onClick={this.props.toggleModal}>Close</button>
+                {isLoading ?
+                    <div>Loading...</div> :
+
+                    <>
+                    <div className='postInfo-content'>
+                        <div>Post information</div>
+                        <div>Post body: {postInfo.body}</div>
+                        <div>User name: {userInfo.name}</div>
+                    </div>
+                    <button onClick={onCloseModal}>Close</button>
+                    </>
+                }
             </div>
         )
     }
