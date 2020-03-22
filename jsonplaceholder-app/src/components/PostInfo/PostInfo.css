@@ -50,6 +50,13 @@
     width: 75%;
     height: 30px;
     margin: 10px auto 0;
+    cursor: pointer;
+    background-color: #d7e9f5;
+    border-color: #edf8ff;
+}
+
+.postInfo-button:hover {
+    background-color: #bde6ff;
 }
 
 .postInfo-loading {

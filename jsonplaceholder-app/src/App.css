@@ -1,15 +1,21 @@
+.main {
+    padding: 15px;
+    background-color: #ebebeb;
+}
+
 .table {
     width: 80%;
-    margin: 10px auto;
+    margin: 0 auto;
     text-align: center;
-    border: 1px solid;
+    border: 1px solid darkgrey;
+    background-color: white;
 }
 
 .table caption {
     height: 50px;
-    border-top: 1px solid;
-    border-right: 1px solid;
-    border-left: 1px solid;
+    border: 1px solid darkgrey;
+    border-bottom: none;
+    background-color: white;
 }
 
 .main-loading {

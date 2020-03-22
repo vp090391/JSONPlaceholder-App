@@ -9,8 +9,8 @@
     padding: 0 15px 0;
 }
 
-[class ^= tableRow] td {
-    border: 1px solid;
+[class ^= tableRow] td{
+    border: 1px solid darkgrey;
 }
 
 [class ^= tableRow]:hover {
@@ -32,4 +32,9 @@
 [class ^= tableRow-button] {
     float: right;
     cursor: pointer;
+    border-color: #edf8ff;
+}
+
+[class ^= tableRow-button]:hover {
+    background-color: #bde6ff;
 }
