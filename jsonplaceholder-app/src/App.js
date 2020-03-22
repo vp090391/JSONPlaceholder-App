@@ -46,7 +46,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const {isLoading, isModalOpen, posts, postInfo,} = this.state;
+        const {isLoading, isModalOpen, posts, postInfo} = this.state;
         return (
             <>
                 {isLoading ?
