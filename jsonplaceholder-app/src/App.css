@@ -16,11 +16,18 @@
     border: 1px solid darkgrey;
     border-bottom: none;
     background-color: white;
+    font-weight: bold;
 }
 
 .main-loading {
     text-align: center;
 }
 
+.table thead th {
+    position: sticky;
+    top: 5px;
+    background-color: white;
+    border: 2px solid darkgrey;
+}
 
 

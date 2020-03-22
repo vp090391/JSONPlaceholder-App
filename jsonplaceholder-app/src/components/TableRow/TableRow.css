@@ -1,16 +1,6 @@
-[class ^= tableRow] div{
-    display: flex;
-    justify-content: space-between;
-}
-
-[class ^= tableRow] div>span{
-    width: 85%;
-    text-align: left;
-    padding: 0 15px 0;
-}
-
 [class ^= tableRow] td{
     border: 1px solid darkgrey;
+    cursor: pointer;
 }
 
 [class ^= tableRow]:hover {
@@ -19,22 +9,15 @@
 
 [class ^= tableRow] td:nth-child(1) {
     width: 70px;
+    vertical-align: top;
 }
 
 [class ^= tableRow] td:nth-child(2) {
     width: 70px;
+    vertical-align: top;
 }
 
 [class ^= tableRow] td:nth-child(3) {
-    width: 700px;
-}
-
-[class ^= tableRow-button] {
-    float: right;
-    cursor: pointer;
-    border-color: #edf8ff;
-}
-
-[class ^= tableRow-button]:hover {
-    background-color: #bde6ff;
+    text-align: left;
+    padding: 0 10px 0 10px;
 }

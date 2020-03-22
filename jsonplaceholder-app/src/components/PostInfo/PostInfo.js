@@ -33,9 +33,7 @@ export default class PostInfo extends React.Component {
             <div className="postInfo">
                 {isLoading ?
                     <div className='postInfo-loading'>Loading...</div> :
-
                     <>
-                        <button className='postInfo-button' onClick={onCloseModal}>Close</button>
                         <table className='postInfo-table'>
                             <caption>Post information</caption>
 
@@ -107,6 +105,7 @@ export default class PostInfo extends React.Component {
                                 </tr>
                             </tbody>
                         </table>
+                        <button className='postInfo-button' onClick={onCloseModal}>Close</button>
                     </>
                 }
             </div>

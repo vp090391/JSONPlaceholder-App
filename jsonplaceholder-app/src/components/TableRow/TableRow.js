@@ -8,16 +8,7 @@ export default class TableRow extends React.Component {
             <tr className={"tableRow-id-" + post.id} onClick={() => onOpenModal(post)}>
                 <td>{post.id}</td>
                 <td>{post.userId}</td>
-                <td>
-                    <div>
-                        <span>{post.title}</span>
-                        <button
-                            className={"tableRow-button-id-" + post.id}
-                            onClick={() => onOpenModal(post)}>
-                            Open full info
-                        </button>
-                    </div>
-                </td>
+                <td>{post.title}</td>
             </tr>
         )
     }
