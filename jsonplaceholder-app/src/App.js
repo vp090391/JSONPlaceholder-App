@@ -1,9 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
 import './App.css';
 import TableRow from "./components/TableRow/TableRow";
+import Modal from "./components/Modal/Modal";
+import PostInfo from "./components/PostInfo/PostInfo";
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -49,7 +50,7 @@ class App extends React.Component {
         return (
             <>
                 {isLoading ?
-                    <div>Loading...</div> :
+                    <div className='main-loading'>Loading...</div> :
 
                     <div className='main'>
                         <table className='table'>
@@ -89,98 +90,3 @@ class App extends React.Component {
         )
     }
 }
-
-class TableRow extends React.Component {
-    render() {
-        const {post, onOpenModal} = this.props;
-        return (
-            <tr className={"tableRow-id-" + post.id}>
-                <td>{post.id}</td>
-                <td>{post.userId}</td>
-                <td>
-                    <div>
-                        <span>{post.title}</span>
-                        <button
-                            className={"tableRow-button-id-" + post.id}
-                            onClick={() => onOpenModal(post)}>
-                            Open full info
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        )
-    }
-}
-
-class Modal extends React.Component {
-    constructor(props) {
-        super(props);
-        this.el = document.createElement('div');
-    }
-
-    componentDidMount() {
-        document.querySelector('.modal').appendChild(this.el)
-    }
-
-    componentWillUnmount() {
-        document.querySelector('.modal').removeChild(this.el)
-    }
-
-    render() {
-        return (
-            ReactDOM.createPortal(
-                this.props.children,
-                this.el,
-            )
-        )
-    }
-}
-
-class PostInfo extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: true,
-            userInfo: {},
-        }
-    }
-
-    componentDidMount() {
-        fetch(`https://jsonplaceholder.typicode.com/users/${this.props.postInfo.userId}`)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({
-                    isLoading: false,
-                    userInfo: data,
-                })
-            })
-            .catch(err => {
-                console.log('Fetch for users data failed');
-                document.querySelector('.postInfo').innerHTML = 'Sorry, server is not available now';
-                this.setState({ isLoading: false })
-            })
-    }
-
-    render() {
-        const {isLoading, userInfo} = this.state;
-        const {postInfo, onCloseModal} = this.props;
-        return (
-            <div className="postInfo">
-                {isLoading ?
-                    <div>Loading...</div> :
-
-                    <>
-                    <div className='postInfo-content'>
-                        <div>Post information</div>
-                        <div>Post body: {postInfo.body}</div>
-                        <div>User name: {userInfo.name}</div>
-                    </div>
-                    <button onClick={onCloseModal}>Close</button>
-                    </>
-                }
-            </div>
-        )
-    }
-}
-
-export default App;

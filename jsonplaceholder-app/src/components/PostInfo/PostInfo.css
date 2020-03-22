@@ -1,0 +1,57 @@
+.postInfo {
+    width:100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.postInfo-table {
+    background-color: white;
+    margin: 10px auto 20px;
+    width: 75%;
+    height: fit-content;
+}
+
+.postInfo-table caption {
+    background-color: white;
+    padding-bottom: 15px;
+}
+
+.postInfo-table td {
+    border: 1px solid;
+    vertical-align: top;
+}
+
+.postInfo-table td span{
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+[class ^= postInfo-table] td:nth-child(1) {
+    width: 100px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+[class ^= postInfo-table] td:nth-child(2) {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.postInfo-table-separator {
+    background-color: honeydew;
+    text-align: center !important;
+}
+
+.postInfo-button {
+    width: 75%;
+    height: 30px;
+    margin: 10px auto 0;
+}
+
+.postInfo-loading {
+    color: white;
+}

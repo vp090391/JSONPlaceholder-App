@@ -1,5 +1,5 @@
 import React from "react";
-
+import './TableRow.css';
 
 export default class TableRow extends React.Component {
     render() {

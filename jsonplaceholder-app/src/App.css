@@ -12,58 +12,8 @@
     border-left: 1px solid;
 }
 
-[class ^= tableRow] div{
-    display: flex;
-    justify-content: space-between;
-}
-
-[class ^= tableRow] div>span{
-    width: 85%;
-    text-align: left;
-    padding: 0 15px 0;
-}
-
-[class ^= tableRow] td {
-    border: 1px solid;
-}
-
-[class ^= tableRow]:hover {
-    background-color: aliceblue;
-}
-
-[class ^= tableRow] td:nth-child(1) {
-    width: 70px;
-    background-color: honeydew;
-}
-
-[class ^= tableRow] td:nth-child(2) {
-    width: 70px;
-}
-
-[class ^= tableRow] td:nth-child(3) {
-    width: 700px;
-}
-
-[class ^= tableRow-button] {
-    float: right;
-    cursor: pointer;
-}
-
-.postInfo {
-    width:100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    background-color: rgba(0,0,0,0.5);
-   /* overflow: hidden;*/
+.main-loading {
     text-align: center;
-}
-
-.postInfo-content {
-    background-color: white;
-    margin: 50px auto 0;
-    width: 70%;
-    height: fit-content;
 }
 
 

@@ -1,0 +1,35 @@
+[class ^= tableRow] div{
+    display: flex;
+    justify-content: space-between;
+}
+
+[class ^= tableRow] div>span{
+    width: 85%;
+    text-align: left;
+    padding: 0 15px 0;
+}
+
+[class ^= tableRow] td {
+    border: 1px solid;
+}
+
+[class ^= tableRow]:hover {
+    background-color: aliceblue;
+}
+
+[class ^= tableRow] td:nth-child(1) {
+    width: 70px;
+}
+
+[class ^= tableRow] td:nth-child(2) {
+    width: 70px;
+}
+
+[class ^= tableRow] td:nth-child(3) {
+    width: 700px;
+}
+
+[class ^= tableRow-button] {
+    float: right;
+    cursor: pointer;
+}
