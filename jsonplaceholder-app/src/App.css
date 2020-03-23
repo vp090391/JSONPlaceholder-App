@@ -17,8 +17,6 @@
     border-bottom: none;
     background-color: white;
     font-weight: bold;
-    position: sticky;
-    top: 0;
 }
 
 .main-loading {
@@ -26,8 +24,6 @@
 }
 
 .table thead th {
-    position: sticky;
-    top: 50px;
     background-color: white;
     border: 2px solid darkgrey;
 }
