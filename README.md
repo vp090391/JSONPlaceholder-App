@@ -9,7 +9,5 @@ Post data is received in JSON format when sending a GET request using the "fetch
 After receiving data using the TableRow component, a table with the primary data about the posts is displayed. When you click on any post, a modal window opens, a request is sent to the server for data about the specific user involved in the post. After receiving a response from the server using the PostInfo component, the complete data about the post is displayed in the form of a table. While waiting for data, the screen also displays "Loading ...".</br>
 The application is correctly displayed in the Google Chrome browser.
 
-<picture>
 <img src="screenshots/Post-table.jpg" alt="screenshot" width="50%"/>
 <img src="screenshots/Post-info.jpg" alt="screenshot" width="50%"/>
-</picture>
